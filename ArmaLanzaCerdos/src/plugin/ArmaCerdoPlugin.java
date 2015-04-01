@@ -49,7 +49,7 @@ public class ArmaCerdoPlugin extends JavaPlugin implements Listener {
 	}
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		Action rightAir = Action.RIGHT_CLICK_AIR;
+		Action rightAi = Action.RIGHT_CLICK_AIR;
 		Action rightBlock = Action.RIGHT_CLICK_BLOCK;
 		Player p = e.getPlayer();
 		if(p.getItemInHand().getItemMeta() == ImCerdo) {
