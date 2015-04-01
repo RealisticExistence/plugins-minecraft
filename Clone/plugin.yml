@@ -1,0 +1,9 @@
+name: clone
+main: plugin.ClonePlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   clone:
+      description: Clones a player
+      usage:  

@@ -1,0 +1,9 @@
+name: LuckyBlocks
+main: plugin.luckyBlocksPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   luckyblocks:
+      description: generate lucky block path
+      usage: 

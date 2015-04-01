@@ -1,0 +1,6 @@
+name: Recipe
+main: plugin.GalletaPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 

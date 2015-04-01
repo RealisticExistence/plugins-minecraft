@@ -1,0 +1,9 @@
+name: clone
+main: permheads.Main
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:
+   clone:
+      description: clones a player
+      usage:   

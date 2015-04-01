@@ -1,0 +1,9 @@
+name: TpBlokes
+main: packAge.Plugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   BloqueTeletransportador:
+      description: Bloque
+      usage: /command [Bloque activado/desactivado]

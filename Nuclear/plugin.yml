@@ -1,0 +1,9 @@
+name: Bloque
+main: bombaP.bombaPlug
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   bomba_nuclear:
+      description: Construye una casa chula.
+      usage: /<command> [bomba_nuclear]

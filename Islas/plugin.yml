@@ -1,0 +1,12 @@
+name: Islas
+main: plugin.IslasPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   islas:
+      description: create some random islands
+      usage: 
+   survival:
+      description: create a survival game
+      usage: 

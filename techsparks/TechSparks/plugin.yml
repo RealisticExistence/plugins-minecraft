@@ -1,0 +1,7 @@
+name: TechSparks
+main: minecraftPlugin.TechSparks
+version: 1
+commands:
+   techtalents:
+      description: Draws techtalents
+      usage: /<command>

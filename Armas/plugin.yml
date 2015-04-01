@@ -1,0 +1,9 @@
+name: Armas
+main: plugin.ArmasPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   firework:
+      description: Firework show
+      usage: 

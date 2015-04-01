@@ -1,0 +1,9 @@
+name: Taladro
+main: plugin.TaladroPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   drill:
+      description: drill a path downwards
+      usage: 

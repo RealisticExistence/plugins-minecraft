@@ -1,0 +1,12 @@
+name: Vehicle
+main: plugin.VehiclePlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   ride:
+      description:
+      usage: 
+   chain:
+      description:
+      usage: 

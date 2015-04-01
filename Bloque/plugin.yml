@@ -1,0 +1,12 @@
+name: Bloque
+main: potionsPackage.PotionsPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   casa:
+      description: Construye una casa chula.
+      usage: /<command> [casa]
+   explosion:
+      description: hace una explosion en las coordenadas puestas
+      usage: /<command>:[explosion generada con exito]

@@ -1,0 +1,9 @@
+name: Egg
+main: plugin.EntityChangePlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   egg:
+      description: Egg somebody!
+      usage: 

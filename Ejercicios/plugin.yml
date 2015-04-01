@@ -1,0 +1,7 @@
+name: Ejercicios
+main: plugin.EjerciciosPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   

@@ -1,0 +1,9 @@
+name: Cabeza
+main: plugin.CabezasPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   cabeza:
+      description: Head
+      usage: 

@@ -1,0 +1,9 @@
+name: huevillos
+main: plugin.HuevosPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   huevo:
+      description: 
+      usage: 
