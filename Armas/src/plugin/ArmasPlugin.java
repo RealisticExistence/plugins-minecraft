@@ -21,9 +21,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ArmasPlugin extends JavaPlugin implements Listener{
-	
+
 	BukkitRunnable br;
-	
+
 	//Variable Chatcolor para el chat
 	ChatColor rojo = ChatColor.RED;
 	Type type = null;
@@ -52,25 +52,25 @@ public class ArmasPlugin extends JavaPlugin implements Listener{
 		Action rB = Action.RIGHT_CLICK_BLOCK;
 		Action lB = Action.LEFT_CLICK_BLOCK;
 		Action lA = Action.LEFT_CLICK_AIR;
-boolean esNullmano = e.getPlayer().getItemInHand() == null;
+		boolean esNullmano = e.getPlayer().getItemInHand() == null;
 		if(!(esNullmano)) {
-			if(e.getAction() == rA || e.getAction() == rB && e.getPlayer().getItemInHand().getType() == Material.WOOD_SPADE) {
-				
+			if((e.getAction() == rA || e.getAction() == rB) && e.getPlayer().getItemInHand().getType() == Material.WOOD_SPADE) {
+
 				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection());
-			en.getVelocity().multiply(2);
+				en.getVelocity().multiply(5);
 			}
-			if(e.getAction() == rA || e.getAction() == rB && e.getPlayer().getItemInHand().getType() == Material.TNT) {
+			if((e.getAction() == rA || e.getAction() == rB) && e.getPlayer().getItemInHand().getType() == Material.TNT) {
 				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection());
-               Entity granada = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.PRIMED_TNT);
-			granada.setVelocity(en.getVelocity());
-			
-			en.remove();
-			
+				Entity granada = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.PRIMED_TNT);
+				granada.setVelocity(en.getVelocity());
+
+				en.remove();
+
 			}
-			
-			
+
+
 		}
-		
+
 	}
 
 

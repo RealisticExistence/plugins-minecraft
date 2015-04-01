@@ -48,10 +48,20 @@ public class Plugin extends JavaPlugin implements Listener{
 							p.sendMessage(ChatColor.RED + "Debes poner un parametro /worldsystem create [nombre]");
 						}
 					}else if(args[0].equalsIgnoreCase("teleport")) {
-						if(args[1] != null && args.length > 1) {
+						if(args[1] != null && args.length > 2) {
 							if(Bukkit.getWorld(args[1]) != null) {
 								World world = Bukkit.getWorld(args[1]);
-								p.teleport(world.getSpawnLocation());
+								if(args[2]!=null){
+									Player pOther = Bukkit.getPlayer(args[2]);
+									if(pOther != null){
+										pOther.teleport(world.getSpawnLocation());
+									}
+									else{
+										p.teleport(world.getSpawnLocation());
+									}
+									
+								}
+								
 							}
 							else{
 								p.sendMessage(ChatColor.RED + "Debes poner un mundo valido");
