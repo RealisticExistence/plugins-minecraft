@@ -42,7 +42,7 @@ public class ArmasPlugin extends JavaPlugin implements Listener{
 		ItemStack pistola = new ItemStack(Material.WOOD_SPADE);
 		ItemMeta pistolaIm = pistola.getItemMeta();
 		pistolaIm.setDisplayName(ChatColor.GOLD + "Desert Eagle");
-		pistolaIm.addEnchant(Enchantment.DAMAGE_ALL, 5, false);
+		pistolaIm.addEnchant(Enchantment.DAMAGE_ALL, 1, false);
 		pistola.setItemMeta(pistolaIm);
 		e.getPlayer().getInventory().addItem(pistola);
 	}
@@ -54,12 +54,12 @@ public class ArmasPlugin extends JavaPlugin implements Listener{
 		Action lA = Action.LEFT_CLICK_AIR;
 boolean esNullmano = e.getPlayer().getItemInHand() == null;
 		if(!(esNullmano)) {
-			if(e.getAction() == rA || e.getAction() == rB && e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals("Desert Eagle")) {
+			if(e.getAction() == rA || e.getAction() == rB && e.getPlayer().getItemInHand().getType() == Material.WOOD_SPADE) {
 				
 				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection());
 			en.getVelocity().multiply(2);
 			}
-			if(e.getAction() == rA || e.getAction() == rB && e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains("granad")) {
+			if(e.getAction() == rA || e.getAction() == rB && e.getPlayer().getItemInHand().getType() == Material.TNT) {
 				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection());
                Entity granada = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.PRIMED_TNT);
 			granada.setVelocity(en.getVelocity());

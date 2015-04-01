@@ -1,6 +1,8 @@
 package plugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -8,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.EulerAngle;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class ArmorStandPlugin extends JavaPlugin implements Listener{
 
@@ -22,26 +26,19 @@ public class ArmorStandPlugin extends JavaPlugin implements Listener{
 	public boolean onCommand(CommandSender sender, Command command,String label, String[] args) {
 		if(command.getName().equalsIgnoreCase("armor")) {
 			Player p = ((Player)sender);
-			ArmorStand a = p.getWorld().spawn(p.getLocation(), ArmorStand.class);
-			a.setCustomName("Conejillo de Indias");
-			a.setCustomNameVisible(true);
-			a.setLeftLegPose(new EulerAngle(0.4, 0.3, 0.5));
-			//a.setVisible(false);
+			Location l = p.getLocation();
+			l.add(0, -1, 0);
+			ArmorStand a = p.getWorld().spawn(l, ArmorStand.class);
 			a.setGravity(false);
+			a.setBodyPose(new EulerAngle(1,0,0));
+			a.setArms(true);
 			a.setVisible(false);
-			ArmorStand a1 = p.getWorld().spawn(p.getLocation().add(0, 0.2, 0), ArmorStand.class);
-			a1.setCustomName("Conejillo de Indias");
-			a1.setCustomNameVisible(true);
-			//a1.setVisible(false);
-			
-			a1.setGravity(false);
-
-			
-			ArmorStand a2 = p.getWorld().spawn(p.getLocation().add(0, 0.4, 0), ArmorStand.class);
-			a2.setCustomName("Conejillo de Indias");
-			a2.setCustomNameVisible(true);
-			//a2.setVisible(false);
-			a2.setGravity(false);
+			a.setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+			ItemStack skull = new ItemStack(Material.SKULL_ITEM,1,(short)3);
+			SkullMeta im = (SkullMeta) skull.getItemMeta();
+			im.setOwner(p.getName());
+			skull.setItemMeta(im);
+			a.setHelmet(skull);
 	
 			
 			
