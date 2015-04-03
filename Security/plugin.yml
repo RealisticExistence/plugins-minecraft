@@ -1,9 +1,9 @@
-name: Security
+name: security
 main: plugin.SecurityPlugin
-author: [Jorge]
-description: Sin descripcion de momento...
+author: [Autor]
+description: 
 version: 1.0
 commands: 
-   security:
+   security: 
       description: Secure your house!
       usage: 
