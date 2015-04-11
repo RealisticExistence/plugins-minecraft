@@ -20,29 +20,13 @@ public class GamePanel extends JPanel {
 
 	Font myFont = new Font("Arial",Font.BOLD,20);
 	Font myFontGameOver = new Font("Arial",Font.BOLD,80);
+	Dibujable aliado;
 	
 	private Ventana ventana;
 	int cuenta = 0;
 	public GamePanel(final Ventana ventana) {
-		final Dibujable bolita = new Dibujable(100,200);
-		Dibujable bolita2 = new Dibujable(600,600);
-		ventana.setBackground(new Color(200,0,255));
-
 		this.ventana = ventana;
-
-		bolita.setLimiteDerecho(ventana.getWidth()-15);
-		bolita.setLimiteArriba(0);
-		bolita.setLimiteAbajo(ventana.getHeight()-36);
-		bolita.setColor(new Color(1, 0, 0.5f));
-		dibujables.add(bolita);
-
-
-		bolita2.setLimiteDerecho(ventana.getWidth()-15);
-		bolita2.setLimiteArriba(0);
-		bolita2.setSpeed(500, 500);
-		bolita2.setLimiteAbajo(ventana.getHeight()-36);
-		bolita2.setColor(new Color(0, 1, 0.5f));
-		dibujables.add(bolita2);
+		crearPartida();
 
 
 		super.setDoubleBuffered(true);
@@ -60,26 +44,29 @@ public class GamePanel extends JPanel {
 						gameOver = false;
 						cuenta = 0;
 						ventana.setTitle("Bola");
+						dibujables.clear();
+						crearPartida();
 					}
 				}
 				if(e.getKeyCode() == KeyEvent.VK_LEFT){
-					bolita.setSpeed(-500.0,0);
+					aliado.setSpeed(-500.0,0);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-					bolita.setSpeed(500.0,0);
+					aliado.setSpeed(500.0,0);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_UP){
-					bolita.setSpeed(0,-500.0);
+					aliado.setSpeed(0,-500.0);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_DOWN){
-					bolita.setSpeed(0,500.0);
+					aliado.setSpeed(0,500.0);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-					ventana.dispose();
-					
+					System.exit(0);
 				}
 				super.keyPressed(e);
 			}
+
+			
 
 
 
@@ -87,6 +74,29 @@ public class GamePanel extends JPanel {
 
 
 	}
+	
+	private void crearPartida() {
+		aliado = new Dibujable(100,200);
+		Dibujable aliado2 = new Dibujable(600,600);
+		ventana.setBackground(new Color(200,0,255));
+
+		
+
+		aliado.setLimiteDerecho(ventana.getWidth()-15);
+		aliado.setLimiteArriba(0);
+		aliado.setLimiteAbajo(ventana.getHeight()-36);
+		aliado.setColor(new Color(1, 0, 0.5f));
+		dibujables.add(aliado);
+
+
+		aliado2.setLimiteDerecho(ventana.getWidth()-15);
+		aliado2.setLimiteArriba(0);
+		aliado2.setSpeed(500, 500);
+		aliado2.setLimiteAbajo(ventana.getHeight()-36);
+		aliado2.setColor(new Color(0, 1, 0.5f));
+		dibujables.add(aliado2);
+	}
+	
 	private boolean gameOver = false;
 	private void crearHiloMovimiento(final Graphics g) {
 		Thread t = new Thread(new Runnable() {
@@ -106,24 +116,7 @@ public class GamePanel extends JPanel {
 						e.printStackTrace();
 					}
 
-					for(Dibujable d : dibujables){
-						d.mover(30);
-
-
-						for(Dibujable d2 : dibujables){
-							if(d != d2){
-								if(d.colision(d2)){
-
-
-									if(!(gameOver)){
-										gameOver  = true; 
-										ventana.setTitle("Game Over");
-									}
-
-								}
-							}
-						}
-					}
+					
 					repaint();
 				}
 			}
@@ -138,14 +131,53 @@ public class GamePanel extends JPanel {
 		
 		if(!(gameOver)){
 			for(Dibujable d : dibujables){
+				d.mover(30);
+
+
+				for(Dibujable d2 : dibujables){
+					if(d != d2 && d == aliado){
+						if(d.colision(d2)){
+
+
+							if(!(gameOver)){
+								gameOver  = true; 
+								ventana.setTitle("Game Over");
+							}
+
+						}
+					}
+				}
+			}
+			Dibujable anadir = null;
+			for(Dibujable d : dibujables){
 				g.setColor(Color.RED);
 				g.setFont(myFont);
 			
 				
 				cuenta++;
+				if(dibujables.size() < cuenta/1000){
+					Dibujable aliado3 = new Dibujable(100,200);
+					aliado3.setLimiteDerecho(ventana.getWidth()-15);
+					aliado3.setLimiteArriba(0);
+					aliado3.setSpeed(Math.random()*500+250, Math.random()*600+250);
+					aliado3.setLimiteAbajo(ventana.getHeight()-36);
+					float transparencia = (float) Math.min(1, Math.max(0, 1-(cuenta/10000.0)));
+					System.out.println(transparencia);
+					aliado3.setColor(new Color((float) Math.random(), (float) Math.random()/2.0f+0.5f, 1f , transparencia));
+					anadir = aliado3;
+					
+					
+				}
 				g.drawString("Score: " + cuenta,50,50);
 				d.dibujar(g);
 			}
+			
+			
+			if(anadir != null){
+				dibujables.add(anadir);
+			}
+			
+			
 		}
 		else{
 			g.setFont(myFontGameOver);

@@ -15,7 +15,7 @@ public class Dibujable {
 	private double vy = 100;
 	private int limiteAbajo;
 	private int limiteSuperior;
-	private int radio=50;
+	private int radio=20;
 
 	public Dibujable(double x, double y) {
 		this.y = y;

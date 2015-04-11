@@ -25,12 +25,13 @@ public class Panel extends JPanel {
 		this.setSize(ventana.getSize());
 		super.requestFocusInWindow();
 
-		ventana.addKeyListener(new KeyAdapter() {
+		super.addKeyListener(new KeyAdapter() {
 
 
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+				
 				if(e.getKeyCode() == KeyEvent.VK_LEFT){
 					if(redOK && blueOK && greenOK){
 						CambiarNumeros();
@@ -73,13 +74,13 @@ public class Panel extends JPanel {
 			
 			@Override
 			public void run() {
-				 while(true){
+				
 					 if(cuenta1 != rand1){
 						 if(cuenta1 < rand1){
-								cuenta1++;
+								cuenta1+=1;
 							}
 							else if(cuenta1 > rand1){
-								cuenta1--;
+								cuenta1-=1;
 							}
 							redOK = false;
 						}
@@ -89,10 +90,10 @@ public class Panel extends JPanel {
 					 
 						if(cuenta2 != rand2){
 							if(cuenta2 < rand2){
-								cuenta2++;
+								cuenta2+=1;
 							}
 							else if(cuenta2 > rand2){
-								cuenta2--;
+								cuenta2-=1;
 							}
 							greenOK = false;
 						}
@@ -102,10 +103,10 @@ public class Panel extends JPanel {
 						}
 						if(cuenta3 != rand3){
 							if(cuenta3 < rand3){
-								cuenta3++;
+								cuenta3+=1;
 							}
 							else if(cuenta3 > rand3){
-								cuenta3--;
+								cuenta3-=1;
 							}
 							
 							blueOK = false;
@@ -116,9 +117,10 @@ public class Panel extends JPanel {
 						}
 
 						ventana.getContentPane().setBackground(new Color(cuenta1,cuenta2,cuenta3));
+						System.out.println(cuenta1+", "+cuenta2 + ", " + cuenta3);
 						repaint();
 						try {
-							Thread.sleep(50);
+							Thread.sleep(5);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -143,7 +145,7 @@ public class Panel extends JPanel {
 					
 				
 				
-			}
+			
 		});
 		t.start();
 		
