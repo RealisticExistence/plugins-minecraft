@@ -1,0 +1,9 @@
+name: Arquito
+main: plugin.EspadaChetaPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   espadacheta:
+      description: espadacheta
+      usage: You have the power!
