@@ -34,7 +34,7 @@ public class EspadaChetaPlugin extends JavaPlugin implements Listener {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,String label, String[] args) {
 		if(!(sender instanceof Player))
-		 NO CERRAR!!!!!!!!!!!!!!
+		
 		 
 		
 		if(command.getName().equalsIgnoreCase("espadacheta")){

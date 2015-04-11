@@ -1,8 +1,17 @@
 package plugin;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -30,6 +39,7 @@ import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -65,40 +75,91 @@ public class PermissionsPlugin extends JavaPlugin implements Listener {
 
 		if(command.getName().equalsIgnoreCase("permission")){
 			if(args[0] != null && args[1] != null && args.length > 1){
-				if(args[0].equalsIgnoreCase("vip")){
-					List<Player> jugadores = p.getWorld().getPlayers();
-					Player player = Bukkit.getPlayer(args[1]);
-					if(jugadores.contains(player)){
-						PermissionAttachment attachment = player.addAttachment(this);
-						attachment.setPermission("vip", true);
-						attachment.unsetPermission("god");
-						attachment.unsetPermission("mvip");
-						a.put(player.getUniqueId(), attachment);
-
-
+				File file = new File("plugins/logs",p.getName()+"'s chat.txt");
+				
+				
+				if(!file.exists()){
+					try {
+						file.createNewFile();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					
 					}
-
+					BufferedWriter w = getBufferedWriter(file);
+				InputStreamReader inputStreamReader = null;
+				try {
+					 inputStreamReader = new InputStreamReader(new FileInputStream (file));
+				} catch (FileNotFoundException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
 				}
-				else if(args[0].equalsIgnoreCase("mvip")){
-					List<Player> jugadores = p.getWorld().getPlayers();
-					Player player = Bukkit.getPlayer(args[1]);
-					if(jugadores.contains(player)){
-						PermissionAttachment attachment = player.addAttachment(this);
-						attachment.setPermission("mvip", true);
-						a.put(player.getUniqueId(), attachment);
-					}
+				BufferedReader re = new BufferedReader(inputStreamReader);
+				try {
+					p.sendMessage(re.readLine());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				else if(args[0].equalsIgnoreCase("god")){
-					List<Player> jugadores = p.getWorld().getPlayers();
-					Player player = Bukkit.getPlayer(args[1]);
-					if(jugadores.contains(player)){	
-						PermissionAttachment attachment = player.addAttachment(this);
-						attachment.setPermission("god", true);
-						a.put(player.getUniqueId(), attachment);
-					}
-				}
+				
 			}
+		}
 		}
 		return false;
 	}
+	
+	public static HashMap<File, BufferedWriter> writers = new HashMap<File, BufferedWriter>();
+	public BufferedWriter getBufferedWriter(File f) {
+	    try {
+	        if (writers.containsKey(f)) {
+	           
+	            return writers.get(f);
+	        } else {
+	           
+	            BufferedWriter returns = new BufferedWriter(new FileWriter(f, true));
+	            writers.put(f, returns);
+	            return returns;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	@EventHandler
+	public void onPlayerChat(PlayerChatEvent e) throws IOException {
+	    
+		File file = new File("plugins/logs",e.getPlayer().getName()+"'s chat.txt");
+		BufferedWriter w = new BufferedWriter(new FileWriter(file, true));
+		
+		
+		if(!file.exists()){
+			try {
+				file.createNewFile();
+				e.getPlayer().sendMessage("Archivo de log creado");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			
+			}
+			
+			
+		}
+		else{
+			try {
+				w.write(e.getMessage());
+				e.getPlayer().sendMessage("Escribiendo log...");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
+			
+		}
+		
+		
+		
+	}
+	
+	
 }

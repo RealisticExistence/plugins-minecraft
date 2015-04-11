@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -50,19 +51,30 @@ public class ImagePlugin extends JavaPlugin implements Listener{
 		Player p = (Player) sender;
 		if(command.getName().equalsIgnoreCase("cabeza")) {
 			try {
-				img = ImageIO.read(new File("C:\\Users\\JorgeHT\\Documents\\servidor\\mc_server\\plugins\\imagen\\hola.png"));
+				img = ImageIO.read(new File("plugins/imagen/hola.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Location center = p.getLocation();
+			
 			for(int x = 0; x < img.getWidth(); x++){
 				for(int y = 0; y < img.getHeight(); y++){
 					if(img.getRGB(x, y) == Color.WHITE.getRGB()){
 						img.setRGB(x, y, Color.TRANSLUCENT);
-						center.add(x, y, 0);
-						center.getBlock().setType(Material.GLOWSTONE);
+						
 					}
+					else{
+						org.bukkit.Color color = org.bukkit.Color.fromRGB(img.getRGB(x, y));
+						
+						DyeColor dyeColor = DyeColor.getByColor(color);
+						ItemStack lana = new ItemStack(Material.WOOL, 1, (byte) dyeColor.getData());
+						
+						Location center = p.getLocation();
+						center.add(x, y, 0);
+						center.getBlock().setType(lana.getType());
+						
+					}
+					
 					
 				}
 				
