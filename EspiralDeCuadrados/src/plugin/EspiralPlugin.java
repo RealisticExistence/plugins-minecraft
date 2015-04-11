@@ -28,6 +28,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class EspiralPlugin extends JavaPlugin implements Listener {
 	
@@ -57,57 +58,42 @@ public class EspiralPlugin extends JavaPlugin implements Listener {
 			return false;
 		
 		}
-		Player p = (Player) sender;
-		if(command.getName().equalsIgnoreCase("examen")){
-			teacher = p.getWorld().spawn(p.getLocation(), Villager.class);
-			teacher.setCustomName("Teacher");
-			teacher.setTarget(p);
-			teacher.setHealth(20);
-			teacher.setProfession(Profession.PRIEST);
+		final Player p = (Player) sender;
+		final int xJ = p.getLocation().getBlockX();
+		final int yJ = p.getLocation().getBlockY();
+		final int zJ = p.getLocation().getBlockZ();
+		if(command.getName().equalsIgnoreCase("pitagoras")){
+			final int radio = 2;
+			for(int cuenta = 0; cuenta < 5; cuenta++){
+				new BukkitRunnable() {
+					
+					@Override
+					public void run() {
+						for(int x = -radio; x < radio; x++){
+							for(int y = 0; y < 2; y++){
+								for(int z = -radio; z < radio; z++){
+									p.getWorld().getBlockAt(xJ+x, yJ+y, zJ+z).setType(Material.STAINED_CLAY);
+									
+									
+								}
+							}
+						}
+						
+					}
+				}.runTaskLater(this, 20);
+				int radio2 = radio;
+				radio2 = radio2*2;
+				
+				
+				
+			}
+			
+			
+			
 			
 		}
 		return false;
 		
 	}
-	int rand = (int) (Math.random()*15);
-	int rand2 = (int) (Math.random()*15);
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEntityEvent ev) {
-		if(teacher == null) {
-			return;
-		}
-		if(ev.getRightClicked() == teacher){
-			
-			ev.getPlayer().sendMessage("Fast! Tell me the sum of " + rand + " and " + rand2);
-			Responded = false;
-			HasStarted = true;
-		}
 	
-	}
-	@EventHandler
-	public void onPlayerChat(PlayerChatEvent ev) {
-		if(!(Responded)) {
-			ev.getPlayer().sendMessage("Answer!!");
-			if(ev.getMessage().equals(rand+rand2)) {
-				Responded = true;
-			}
-		}
-		
-		
-	}
-	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent ev) {
-		if(HasStarted) {
-			if(!(Responded)) {
-				ev.getPlayer().sendMessage("ANSWER!!!");
-				ev.setCancelled(true);
-			}
-			else{
-				ev.getPlayer().sendMessage("Good work!");
-				ev.setCancelled(false);
-			}
-		}
-		
-		
-	}
 }

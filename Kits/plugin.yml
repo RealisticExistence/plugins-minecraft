@@ -1,0 +1,6 @@
+name: security
+main: plugin.KitsPlugin
+author: [Autor]
+description: 
+version: 1.0
+commands: 

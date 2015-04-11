@@ -1,0 +1,9 @@
+name: Permissions
+main: plugin.PermissionsPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   permissions: 
+      description: techtalents!!
+      usage: 

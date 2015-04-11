@@ -1,13 +1,12 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.text.html.HTML.Tag;
 
 public class Panel extends JPanel {
 	private static final long serialVersionUID = 3350710760250147620L;
@@ -20,14 +19,12 @@ public class Panel extends JPanel {
 	boolean redOK = true;
 	boolean greenOK = true;
 	boolean blueOK = true;
-	private volatile Thread blinker;
 	public Panel(final Ventana ventana) {
-		redOK = true;
-		greenOK = true;
-		blueOK = true;
 		this.ventana = ventana;
 		super.setFocusable(true);
+		this.setSize(ventana.getSize());
 		super.requestFocusInWindow();
+
 		ventana.addKeyListener(new KeyAdapter() {
 
 
@@ -37,6 +34,9 @@ public class Panel extends JPanel {
 				if(e.getKeyCode() == KeyEvent.VK_LEFT){
 					if(redOK && blueOK && greenOK){
 						CambiarNumeros();
+						redOK = false;
+						greenOK = false;
+						blueOK = false;
 					}
 
 
@@ -58,9 +58,9 @@ public class Panel extends JPanel {
 	}
 
 	private void CambiarNumeros() {
-		rand1 = (int) (Math.floor(Math.random()*200));
-		rand2 = (int) (Math.floor(Math.random()*200));
-		rand3 = (int) (Math.floor(Math.random()*200));
+		rand1 = (int) (Math.floor(Math.random()*200))+1;
+		rand2 = (int) (Math.floor(Math.random()*200))+1;
+		rand3 = (int) (Math.floor(Math.random()*200))+1;
 
 	}
 
@@ -69,54 +69,94 @@ public class Panel extends JPanel {
 	int cuenta3 = 0;
 
 	private void CambiarFondo() {
-		final Runnable r = new Runnable() {
+		Thread t =new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
-				 Thread thisThread = Thread.currentThread();
-			        while (blinker == thisThread) {
-			            try {
-			                thisThread.sleep(100);
-			            } catch (InterruptedException e){
-			            }
-			            repaint();
-			        }
-				if(cuenta1 < rand1){
-					cuenta1++;
-					redOK = false;
-				}
-				else{
-					redOK = true;
-				}
-				if(cuenta2 < rand2){
-					cuenta2++;
-					greenOK = false;
-				}
-				else{
-					greenOK = true;
+				 while(true){
+					 if(cuenta1 != rand1){
+						 if(cuenta1 < rand1){
+								cuenta1++;
+							}
+							else if(cuenta1 > rand1){
+								cuenta1--;
+							}
+							redOK = false;
+						}
+						else{
+							redOK = true;
+						}
+					 
+						if(cuenta2 != rand2){
+							if(cuenta2 < rand2){
+								cuenta2++;
+							}
+							else if(cuenta2 > rand2){
+								cuenta2--;
+							}
+							greenOK = false;
+						}
+						else{
+							greenOK = true;
 
-				}
-				if(cuenta3 < rand3){
-					cuenta3++;
-					blueOK = false;
-				}
-				else{
-					blueOK = true;
+						}
+						if(cuenta3 != rand3){
+							if(cuenta3 < rand3){
+								cuenta3++;
+							}
+							else if(cuenta3 > rand3){
+								cuenta3--;
+							}
+							
+							blueOK = false;
+						}
+						else{
+							blueOK = true;
 
-				}
+						}
 
-				ventana.getContentPane().setBackground(new Color(cuenta1,cuenta2,cuenta3));
+						ventana.getContentPane().setBackground(new Color(cuenta1,cuenta2,cuenta3));
+						repaint();
+						try {
+							Thread.sleep(50);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if(redOK && greenOK && blueOK){
+						 cuenta1 = rand1;
+						 cuenta2 = rand2;
+						 cuenta3 = rand3;
+						 if(redOK && blueOK && greenOK){
+								CambiarNumeros();
+								redOK = false;
+								greenOK = false;
+								blueOK = false;
+							}
+						}
+					
+				 }
 				
-			if(blueOK && redOK && greenOK){
-				blinker = null;
-			}
+
+
+
+					
+				
 				
 			}
-		};
-		r.run();
+		});
+		t.start();
 		
 			
 		
 	}
+	
+
+	@Override
+	public void paint(Graphics g){
+		super.paint(g);
+		
+	}
+	
 }
 

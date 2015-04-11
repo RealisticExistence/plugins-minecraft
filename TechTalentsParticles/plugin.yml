@@ -1,0 +1,9 @@
+name: TechTelantssParticles
+main: plugin.ParticlesPlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   set: 
+      description: techtalents!!
+      usage: 

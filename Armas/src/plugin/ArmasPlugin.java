@@ -2,16 +2,19 @@ package plugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -31,35 +34,41 @@ public class ArmasPlugin extends JavaPlugin implements Listener{
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this,this);
 	}
+	ItemStack granada = new ItemStack(Material.TNT);
+	ItemStack pistola = new ItemStack(Material.WOOD_SPADE);
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		ItemStack granada = new ItemStack(Material.TNT);
+		
 		ItemMeta granadaIm = granada.getItemMeta();
 		granadaIm.addEnchant(Enchantment.DURABILITY, 1, false);
 		granadaIm.setDisplayName(ChatColor.RED + "Granade");
 		granada.setItemMeta(granadaIm);
 		e.getPlayer().getInventory().addItem(granada);
-		ItemStack pistola = new ItemStack(Material.WOOD_SPADE);
+	
 		ItemMeta pistolaIm = pistola.getItemMeta();
 		pistolaIm.setDisplayName(ChatColor.GOLD + "Desert Eagle");
 		pistolaIm.addEnchant(Enchantment.DAMAGE_ALL, 1, false);
 		pistola.setItemMeta(pistolaIm);
 		e.getPlayer().getInventory().addItem(pistola);
 	}
+	Projectile en = null;
+	Player p = null;
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
+	
 		Action rA = Action.RIGHT_CLICK_AIR;
 		Action rB = Action.RIGHT_CLICK_BLOCK;
 		Action lB = Action.LEFT_CLICK_BLOCK;
 		Action lA = Action.LEFT_CLICK_AIR;
 		boolean esNullmano = e.getPlayer().getItemInHand() == null;
 		if(!(esNullmano)) {
-			if((e.getAction() == rA || e.getAction() == rB) && e.getPlayer().getItemInHand().getType() == Material.WOOD_SPADE) {
-
-				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection());
-				en.getVelocity().multiply(5);
+			if((e.getAction() == rA || e.getAction() == rB) && e.getPlayer().getItemInHand().getType() == pistola.getType()) {
+				p = e.getPlayer();
+				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection().multiply(10));
+				
 			}
-			if((e.getAction() == rA || e.getAction() == rB) && e.getPlayer().getItemInHand().getType() == Material.TNT) {
+			if((e.getAction() == rA || e.getAction() == rB) && e.getPlayer().getItemInHand().getType() == granada.getType()) {
+				p = e.getPlayer();
 				Projectile en = e.getPlayer().launchProjectile(Arrow.class,e.getPlayer().getEyeLocation().getDirection());
 				Entity granada = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.PRIMED_TNT);
 				granada.setVelocity(en.getVelocity());
@@ -71,6 +80,22 @@ public class ArmasPlugin extends JavaPlugin implements Listener{
 
 		}
 
+	}
+	@EventHandler
+	public void onProjectileLaunch(ProjectileLaunchEvent e){
+		if(en != null && e.getEntity().getType() == en.getType()){
+			if(p != null){
+				p.sendMessage("Projectile Launched!");
+				p.playEffect(en.getLocation(), Effect.MOBSPAWNER_FLAMES, 2);
+			}
+			
+			
+		}
+		
+		
+		
+		
+		
 	}
 
 

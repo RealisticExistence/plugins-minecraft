@@ -1,6 +1,9 @@
-name: End
+name: TechTelantss
 main: plugin.EndPlugin
 author: [Jorge]
 description: Sin descripcion de momento...
 version: 1.0
 commands: 
+   techtalents: 
+      description: techtalents!!
+      usage: 

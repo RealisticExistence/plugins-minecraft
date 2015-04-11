@@ -1,0 +1,9 @@
+name: Imagen
+main: plugin.ImagePlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   cabeza:
+      description: Head
+      usage: 

@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
 	public GamePanel(final Ventana ventana) {
 		final Dibujable bolita = new Dibujable(100,200);
 		Dibujable bolita2 = new Dibujable(600,600);
-		super.setBackground(new Color(200,0,255));
+		ventana.setBackground(new Color(200,0,255));
 
 		this.ventana = ventana;
 

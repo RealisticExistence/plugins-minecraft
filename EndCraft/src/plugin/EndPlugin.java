@@ -37,6 +37,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 public class EndPlugin extends JavaPlugin implements Listener {
 	boolean isPlaced = false;
@@ -47,25 +49,76 @@ public class EndPlugin extends JavaPlugin implements Listener {
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 	}
 
-	
-
-
-	@EventHandler
-	public void onChestCreat(PrepareItemCraftEvent event){
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if(command.getName().equalsIgnoreCase("techtalents")){
+			int radioExterior = 22;
+			final int radioInterior = 19;
+			final int radioAro = 17;
+			
+			final Player p = (Player) sender;
+			
+			Location centro = p.getLocation();
+			
+			final ItemStack c = new ItemStack(Material.STAINED_CLAY,1,(short)1);
+			final Material m = Material.AIR;
+			
+			final int x = centro.getBlockX();
+		    final int y = centro.getBlockY();
+			final int z = centro.getBlockZ();
+			
+			for(int i = -radioExterior; i < radioExterior; i++){
+				for(int j = 0; j < 1; j++){
+					for(int k = -radioExterior; k < radioExterior; k++){
+						if(Math.sqrt((j*j)+(i*i)+(k*k)) <= radioExterior){
+							final int k2 = k;
+							final int j2 = j;
+							final int i2 = i;
+							
+								
+								
+									p.sendMessage("X: "+i2+", Y: "+j2+", Z: "+k2);
+									p.getWorld().getBlockAt(x+i2,j2+y,k2+z).setType(c.getType());
+										if(Math.sqrt((j2*j2)+(i2*i2)+(k2*k2)) <= radioInterior){
+											p.getWorld().getBlockAt(x+i2,j2+y,k2+z).setType(m);
+											if(Math.sqrt((j2*j2)+(i2*i2)+(k2*k2)) <= radioAro){
+												p.getWorld().getBlockAt(x+i2,j2+y,k2+z).setType(c.getType());
+											
+											
+											
+										}
+									
+								}
+							
+							
+								
+							
+								
+								
+							
+					}
+							
+						
+						
+					}
+				}
+			}
+			
+			
+			
+			
+			
+		}
 		
-		ItemStack End = new ItemStack(Material.ENDER_PORTAL_FRAME);
-		ItemMeta EndIm = End.getItemMeta();
-		EndIm.setDisplayName(ChatColor.GOLD + "End portal");
-		End.setItemMeta(EndIm);
-	
-		ShapedRecipe EndR = new ShapedRecipe(End);
-		EndR.shape(new String[] { "SSS", "III", "SSS" });
-		EndR.setIngredient('S', Material.ENDER_PEARL);
-		EndR.setIngredient('I', Material.ENDER_STONE ); 
-		getServer().addRecipe(EndR);
-
-		((HumanEntity) event.getViewers()).getInventory().addItem(End);
+		
+		return false;
+		
 	}
+
+	
+
+
+	
 
 
 

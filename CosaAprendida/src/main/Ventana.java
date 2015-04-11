@@ -28,7 +28,7 @@ public class Ventana extends JFrame{
 		super.setTitle("Bola");
 		super.getContentPane().setBackground(new Color(200,0,255));
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+		super.setContentPane(new GamePanel(this));
 		playSound();
 	}
 		

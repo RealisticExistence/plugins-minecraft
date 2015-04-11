@@ -1,4 +1,4 @@
-package plugin;
+Fbopackage plugin;
 
 import javax.swing.text.html.parser.Entity;
 
