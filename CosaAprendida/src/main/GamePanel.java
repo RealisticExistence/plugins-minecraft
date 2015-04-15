@@ -155,7 +155,7 @@ public class GamePanel extends JPanel {
 			
 				
 				cuenta++;
-				if(dibujables.size() < cuenta/1000){
+				if(dibujables.size() < cuenta/100){
 					Dibujable aliado3 = new Dibujable(100,200);
 					aliado3.setLimiteDerecho(ventana.getWidth()-15);
 					aliado3.setLimiteArriba(0);

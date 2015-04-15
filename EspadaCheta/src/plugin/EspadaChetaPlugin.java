@@ -52,6 +52,7 @@ public class EspadaChetaPlugin extends JavaPlugin implements Listener {
 			 im.addEnchant(Enchantment.DAMAGE_ALL, 100, false);
 			 im.setDisplayName(ChatColor.RED+""+ChatColor.BOLD+"Ultimate Sword");
 			 espadaCheta.setItemMeta(im);
+			 final ArmorStand a = p.getWorld().spawn(p.getLocation(), ArmorStand.class);
 			for(int i = 20; i > 0; i--){
 				
 				final Location loc = p.getLocation();
@@ -60,13 +61,18 @@ public class EspadaChetaPlugin extends JavaPlugin implements Listener {
 					
 					@Override
 					public void run() {
+						p.getEyeLocation().getDirection().getX();
 						
-						loc.add(0, -j/10, 0);
-						 ArmorStand a = p.getWorld().spawn(p.getLocation(), ArmorStand.class);
+						
+						loc.add(p.getEyeLocation().getDirection());
+						loc.add(0, -(j/10), 0);
+						a.teleport(loc);
+						a.setGravity(false);
 							a.setVisible(false);
 							a.setItemInHand(espadaCheta);
+							
 					}
-				}.runTaskLater(this, 5*(20-i));
+				}.runTaskTimer(this,0, 5+(20-i));
 				
 			}
 		
@@ -103,6 +109,7 @@ public class EspadaChetaPlugin extends JavaPlugin implements Listener {
 			
 			@Override
 			public void run() {
+				loc.add(0, 0, 2.5);
 				for(int i = loc.getBlockX();i < 5;i++){
 					loc.add(1, 0, 0);
 					p.playEffect(loc, Effect.MOBSPAWNER_FLAMES, 2);
