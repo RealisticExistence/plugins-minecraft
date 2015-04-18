@@ -47,6 +47,7 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 	boolean IsActivated = false;
 	List<Player> equipo1 = null;
 	List<Player> equipo2 = null;
+	final ArrayList<String> playerNames = new ArrayList<String>();
 	@Override
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
@@ -65,7 +66,7 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 		}
 		p = (Player) sender;
 		jugadores = p.getWorld().getPlayers();
-
+		
 		if(command.getName().equalsIgnoreCase("islas")) {
 
 
@@ -99,7 +100,9 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 						l.setY(yy+50);
 						crearIsla(piedra,tierra,cesped,alturaTierra,p,l);
 						if(i<jugadores.size()){
-
+							playerNames.add(jugadores.get(i).getDisplayName());
+								
+							
 							jugadores.get(i).teleport(l);
 						}
 
@@ -135,9 +138,9 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void onPlayerDie(PlayerDeathEvent ev) {
-		if(jugadores.contains(ev.getEntity())) {
-			jugadores.remove(ev.getEntity());
-			if(jugadores.size() == 1) {
+		if(playerNames.contains(ev.getEntity().getDisplayName())) {
+			playerNames.remove(ev.getEntity().getDisplayName());
+			if(playerNames.size() == 1) {
 				Bukkit.getServer().unloadWorld(w, true);
 			}
 		}

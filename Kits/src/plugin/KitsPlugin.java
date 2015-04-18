@@ -12,6 +12,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -77,7 +78,7 @@ public class KitsPlugin extends JavaPlugin implements Listener {
 	}
 	boolean hasOlafsArmor = false;
 	@EventHandler
-	public void onPlayerInteractInventory(InventoryInteractEvent e){
+	public void onPlayerInteractInventory(InventoryClickEvent e){
 		if(e.getInventory() == i){
 			Player p = (Player) e.getWhoClicked();
 			if(e.getWhoClicked().getItemOnCursor() != null && e.getWhoClicked().getItemOnCursor().getType() == Material.SNOW_BALL){

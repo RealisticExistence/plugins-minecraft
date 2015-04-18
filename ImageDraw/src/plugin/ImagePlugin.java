@@ -64,13 +64,10 @@ public class ImagePlugin extends JavaPlugin implements Listener{
 						
 					}
 					else{
-						org.bukkit.Color color = org.bukkit.Color.fromRGB(img.getRGB(x, y));
-						
-						DyeColor dyeColor = DyeColor.getByColor(color);
-						ItemStack lana = new ItemStack(Material.WOOL, 1, (byte) dyeColor.getData());
 						
 						Location center = p.getLocation();
 						center.add(x, y, 0);
+						ItemStack lana = new ItemStack(Material.WOOL,1,DyeColor.ORANGE.getData());
 						center.getBlock().setType(lana.getType());
 						
 					}

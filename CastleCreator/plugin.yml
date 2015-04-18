@@ -1,0 +1,9 @@
+name: Castle
+main: plugin.CastlePlugin
+author: [Jorge]
+description: Sin descripcion de momento...
+version: 1.0
+commands: 
+   castlecreator:
+      description: create a castle
+      usage: 

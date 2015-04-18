@@ -21,6 +21,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -33,7 +34,7 @@ public class EntityChangePlugin extends JavaPlugin implements Listener{
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 	}
 
-	EntityType ent = null;
+	String ent = null;
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,String label, String[] args) {
 
@@ -41,16 +42,13 @@ public class EntityChangePlugin extends JavaPlugin implements Listener{
 			return false;
 		}
 		Player p = (Player) sender;
-		if(command.getName().equalsIgnoreCase("egg")) {
-			ItemStack huevo = new ItemStack(Material.EGG);
-			ItemMeta huevoIm = huevo.getItemMeta();
-			huevoIm.setDisplayName(ChatColor.GOLD  + "Huevos Del Poder");
-			huevoIm.addEnchant(Enchantment.ARROW_KNOCKBACK,3,true);
-			huevo.setItemMeta(huevoIm);
-			for(int i = 0; i<64;i++) {
-				p.getInventory().addItem(huevo);
-			}
+		if(command.getName().equalsIgnoreCase("set")) {
+			if(args[0] != null && args.length > 0){
+				ent = args[0];
+				
 
+
+			}
 
 		}
 
@@ -58,16 +56,15 @@ public class EntityChangePlugin extends JavaPlugin implements Listener{
 		return false;
 	}
 	@EventHandler
-	public void onPlayerthrow(PlayerEggThrowEvent e) {
-		if(e.getEgg().getShooter() instanceof Player) {
+	public void onPLayerInteractentity(PlayerInteractEntityEvent e) {
 			Player player = e.getPlayer();
 			Location l = player.getLocation();
-			l.add(0, 10, 0);
-			player.teleport(l);
-			l.add(0, -10, 0);
-
+		if(ent != null){
+			
+			
+			
+			
 		}
-
 
 
 
