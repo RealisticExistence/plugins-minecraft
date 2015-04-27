@@ -1,5 +1,6 @@
 package util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -10,10 +11,18 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class Utils {
+public class Utils extends JavaPlugin{
 static ChatColor verde = ChatColor.GREEN;
 static ChatColor rojo = ChatColor.RED;
+	public static void mandarMensaje(String s, String player){
+		Player p = Bukkit.getPlayer(player);
+		p.sendMessage(s);
+		
+		
+	}
+	
 	
 	public static void borrarInventario(Player e) {
 		e.getInventory().clear();

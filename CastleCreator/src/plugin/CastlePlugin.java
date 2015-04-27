@@ -173,16 +173,17 @@ public class CastlePlugin extends JavaPlugin implements Listener{
 						Block b = loc.getWorld().getBlockAt(x+xP, y+yP, z+zP);
 
 						b.setType(castleMaterial);
-						
+
 					}
 				}	
 			}	
 		}
 
-		
-		
+
+		int cuenta = 0;
+		boolean almena = true;
 		for(int x = -radio2; x <= radio2; x++){
-			
+
 			for(int y = altura; y <= altura+3; y++){
 				for(int z = -radio2; z <= radio2; z++){
 					if((int)Math.sqrt(x*x+z*z) <= radio2){
@@ -190,23 +191,34 @@ public class CastlePlugin extends JavaPlugin implements Listener{
 							Block b2 = loc.getWorld().getBlockAt(x+xP, y+yP, z+zP);
 
 							b2.setType(castleMaterial);
-							
-							
+
+
 						}
 						else if((int)Math.sqrt(x*x+z*z) == radio2){
-							if(x%2 == 1 || z%2 == 1){
-								Block b2 = loc.getWorld().getBlockAt(x+xP, y+yP, z+zP);
-
-								b2.setType(castleMaterial);
-							}
 							
+							if(almena){
+								Block b2 = loc.getWorld().getBlockAt(x+xP, y+yP, z+zP);
+								b2.setType(castleMaterial);
+							
+							}
+							if(almena){
+								almena = false;
+							}
+							else{
+								almena = true;
+							}
 						}
-					}
-				}	
-			}	
-		}
 
+
+
+
+					}
+				}
+			}	
+		}	
 	}
 
 }
+
+
 
