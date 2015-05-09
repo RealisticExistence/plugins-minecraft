@@ -58,7 +58,8 @@ public class HuevosPlugin extends JavaPlugin implements Listener{
 			for(int i = 0; i < jugadores.size(); i++) {
 				Player p2 = jugadores.get(i);
 				p2.teleport(w.getSpawnLocation());
-				Utils.borrarInventario(p2);
+				util.Utils.borrarInventario(p2);
+				
 				p2.sendMessage("Teneis 5 minutos para equiparos");
 			}
 			w.setPVP(false);

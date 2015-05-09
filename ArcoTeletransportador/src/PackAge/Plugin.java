@@ -54,12 +54,12 @@ public class Plugin extends JavaPlugin implements Listener {
 		if(ev.getEntityType() == EntityType.ARROW) {
 			if(ev.getEntity().getShooter() instanceof Player) {
 
-
+				/*
 				Player p = (Player) ev.getEntity().getShooter();
 				
 				ItemMeta im = p.getItemInHand().getItemMeta();
 				im.setDisplayName(ChatColor.RED + "El propulsa cerdos");
-				im.addEnchant(Enchantment.ARROW_DAMAGE, 100, true);
+				im.addEnchant(Enchantment.ARROW_DAMAGE, 10, true);
 				im.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 				p.getItemInHand().setItemMeta(im);
 				Vector vector = p.getEyeLocation().getDirection().multiply(5);//ev.getEntity().getLocation().getDirection().multiply(2);
@@ -68,6 +68,8 @@ public class Plugin extends JavaPlugin implements Listener {
 				
 				
 				pig.setVelocity(vector);
+				*/
+				ev.getEntity().setPassenger((Entity) ev.getEntity().getShooter());
 				
 
 			}

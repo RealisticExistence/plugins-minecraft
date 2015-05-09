@@ -1,9 +1,9 @@
-name: huevillos
+name: SURVIVAL
 main: plugin.HuevosPlugin
 author: [Jorge]
 description: Sin descripcion de momento...
 version: 1.0
 commands: 
-   huevo:
+   survival:
       description: 
       usage: 

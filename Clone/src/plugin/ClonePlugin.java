@@ -5,6 +5,8 @@ import javax.swing.text.html.parser.Entity;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
@@ -13,11 +15,14 @@ import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ClonePlugin extends JavaPlugin implements Listener{
-
+	Location loc1 = null;
+	Location loc2 = null;
 //Variable Chatcolor para el chat
 		ChatColor rojo = ChatColor.RED;
 		
@@ -25,20 +30,45 @@ public class ClonePlugin extends JavaPlugin implements Listener{
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this,this);
 	}
-    private NPC npc;
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(command.getName().equalsIgnoreCase("clone")) {
-			if(sender instanceof Player) {
-			Player p = (Player) sender;
-			EntityType en = npc.getType();
-			p.getWorld().spawnEntity(p.getLocation(), en);
-			}
-			
+	@EventHandler
+	public void onPLayerInteract(PlayerInteractEvent e){
+
+		if(e.getAction() == Action.LEFT_CLICK_BLOCK){
+			Player p = e.getPlayer();
+			loc1 = p.getTargetBlock(null, 255).getLocation();
+			p.sendMessage(ChatColor.BLUE + "Localizacion 1 cogida: " + loc1.getBlockX() + ", " + loc1.getBlockY() + ", " + loc1.getBlockZ());
+
 		}
-		return false;
+		if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
+			Player p = e.getPlayer();
+			loc2 = p.getTargetBlock(null, 255).getLocation();
+			p.sendMessage(ChatColor.BLUE + "Localizacion 2 cogida: " + loc2.getBlockX() + ", " + loc2.getBlockY() + ", " + loc2.getBlockZ());
+		}
+		if(loc1 != null && loc2 != null){
+			
+			
+			
+			int x2 = Math.max(loc1.getBlockX(), loc2.getBlockX());
+			int x1 = Math.min(loc1.getBlockX(), loc2.getBlockX());
+			int z1 = Math.min(loc1.getBlockZ(), loc2.getBlockZ());
+			int z2 = Math.max(loc1.getBlockZ(), loc2.getBlockZ());
+			int y1 = Math.min(loc1.getBlockY(), loc2.getBlockY());
+			int y2 = Math.max(loc1.getBlockY(), loc2.getBlockY());
+			
+			for(int x = x1; x <= x2; x++){
+				for(int y = y1; y <= y2; y++){
+					for(int z = z1; z <= z2; z++){
+						Block b = e.getPlayer().getWorld().getBlockAt(x, y, z);
+						b.setType(Material.TNT);
+						
+					}
+				}
+				
+			}
+		}
+		
+
 	}
 
-	
-	
-}  
+
+}

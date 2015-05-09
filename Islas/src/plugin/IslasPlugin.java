@@ -71,7 +71,7 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 
 
 			p = (Player)sender;
-			w = Bukkit.createWorld(new WorldCreator("hello"));
+			w = Bukkit.createWorld(new WorldCreator(Math.random()*10000 + ""));
 			for(int i = 0;i<jugadores.size(); i++){
 				jugadores.get(i).teleport(w.getSpawnLocation());
 			}
@@ -214,7 +214,7 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 
 		Chest c = (Chest) w.getBlockAt(x+rand, y, z+rand2).getState();
 		Inventory i = c.getInventory();
-		List<Material> materials = Arrays.asList(Material.DIAMOND_HELMET,Material.DIAMOND_CHESTPLATE,Material.DIAMOND_LEGGINGS,Material.DIAMOND_BOOTS,Material.IRON_HELMET,Material.IRON_CHESTPLATE,Material.IRON_LEGGINGS,Material.IRON_BOOTS,Material.GOLD_HELMET,Material.GOLD_CHESTPLATE,Material.GOLD_LEGGINGS,Material.GOLD_BOOTS,Material.CHAINMAIL_HELMET,Material.CHAINMAIL_CHESTPLATE,Material.CHAINMAIL_LEGGINGS,Material.CHAINMAIL_BOOTS,Material.LEATHER_HELMET,Material.LEATHER_CHESTPLATE,Material.LEATHER_LEGGINGS,Material.LEATHER_BOOTS,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE);
+		List<Material> materials = Arrays.asList(Material.DIAMOND_HELMET,Material.DIAMOND_CHESTPLATE,Material.DIAMOND_LEGGINGS,Material.DIAMOND_BOOTS,Material.IRON_HELMET,Material.IRON_CHESTPLATE,Material.IRON_LEGGINGS,Material.IRON_BOOTS,Material.GOLD_HELMET,Material.GOLD_CHESTPLATE,Material.GOLD_LEGGINGS,Material.GOLD_BOOTS,Material.CHAINMAIL_HELMET,Material.CHAINMAIL_CHESTPLATE,Material.CHAINMAIL_LEGGINGS,Material.CHAINMAIL_BOOTS,Material.LEATHER_HELMET,Material.LEATHER_CHESTPLATE,Material.LEATHER_LEGGINGS,Material.LEATHER_BOOTS,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE,Material.DIAMOND_SWORD,Material.IRON_SWORD,Material.GOLD_SWORD,Material.STONE_SWORD,Material.WOOD_SWORD,Material.COOKED_BEEF,Material.APPLE, Material.BOW, Material.ARROW);
 
 
 		int quantity = (int) (Math.random()*(5-10)+10);
@@ -223,6 +223,10 @@ public class IslasPlugin extends JavaPlugin implements Listener {
 			i.addItem(new ItemStack(materials.get(randMaterial)));
 			for(int q = 0; q < 20; q++) {
 				i.addItem(new ItemStack(Material.WOOD));
+
+			}
+			for(int q = 0; q < 16; q++) {
+				i.addItem(new ItemStack(Material.EGG));
 
 			}
 			if(materials.get(randMaterial) == Material.ARROW) {

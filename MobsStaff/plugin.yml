@@ -1,0 +1,9 @@
+name: mobstaff
+main: PackAge.Plugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   setmobstaff:
+      description: 
+      usage: 

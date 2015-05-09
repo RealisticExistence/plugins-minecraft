@@ -1,0 +1,6 @@
+name: Flecha
+main: plugin.FlechaPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  

@@ -1,0 +1,6 @@
+name: DeadAlive
+main: plugin.DeadPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  

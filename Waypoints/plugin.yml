@@ -1,0 +1,9 @@
+name: WayPoints
+main: plugin.WaypointsPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   waypoints:
+      description: Waypoints plugin
+      usage: 
