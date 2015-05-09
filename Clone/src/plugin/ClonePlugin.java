@@ -23,9 +23,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ClonePlugin extends JavaPlugin implements Listener{
 	Location loc1 = null;
 	Location loc2 = null;
+	Material materiales[][][];
 //Variable Chatcolor para el chat
 		ChatColor rojo = ChatColor.RED;
+		int locx = 0;
+		int locy = 0;
+		int locz = 0;
 		
+		
+
 	@Override
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this,this);
@@ -56,11 +62,17 @@ public class ClonePlugin extends JavaPlugin implements Listener{
 			int y2 = Math.max(loc1.getBlockY(), loc2.getBlockY());
 			
 			for(int x = x1; x <= x2; x++){
+
 				for(int y = y1; y <= y2; y++){
+
 					for(int z = z1; z <= z2; z++){
 						Block b = e.getPlayer().getWorld().getBlockAt(x, y, z);
-						b.setType(Material.TNT);
-						
+						materiales[x][y][z] = b.getType();
+						locz++;
+						locy++;
+						locx++;
+
+
 					}
 				}
 				
@@ -69,6 +81,36 @@ public class ClonePlugin extends JavaPlugin implements Listener{
 		
 
 	}
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if(!(sender instanceof Player)){
+			return false;
+			
+		}
+		Player p = (Player) sender;
+		if(command.getName().equalsIgnoreCase("clone")){
+			Location l = p.getLocation();
+			int xp = p.getLocation().getBlockX();
+			int yp = p.getLocation().getBlockY();
+			int zp = p.getLocation().getBlockZ();
+		
+			
+			
+			for(int x = 0; x < locx; x++){
+				for(int y = 0; y < locy; y++){
+					for(int z = 0; z < locz; z++){
+						Block b = p.getWorld().getBlockAt(x+xp, y+yp, z+zp);
+						b.setType(materiales[x][y][z]);
+					}
+				}
+			}
+			
+			
+		}
+		
+		return false;
+	}
+	
 
 
 }

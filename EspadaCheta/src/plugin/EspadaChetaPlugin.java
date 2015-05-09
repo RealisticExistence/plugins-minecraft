@@ -97,14 +97,10 @@ public class EspadaChetaPlugin extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
 		if(e.getPlayer().getItemInHand() != null){
-			Bukkit.broadcastMessage("item OK");
 			if(e.getPlayer().getItemInHand().getItemMeta() != null){
-				Bukkit.broadcastMessage("ITEMMETA item OK");
 				if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName() != null){
-					Bukkit.broadcastMessage("NAME item OK");
 					if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains("Ultimate")){
 						Location loc = e.getPlayer().getLocation();
-						Bukkit.broadcastMessage("OK");
 						crearEfecto(loc,e.getPlayer());
 
 
