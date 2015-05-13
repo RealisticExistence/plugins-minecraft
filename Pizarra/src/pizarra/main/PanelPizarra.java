@@ -124,7 +124,7 @@ public class PanelPizarra extends JPanel implements MouseMotionListener{
 			
 			}
 			lastx =  c.getLocation().x;
-			lasty=  c.getLocation().y - 20;
+			lasty =  c.getLocation().y - 20;
 			
 			
 	       }

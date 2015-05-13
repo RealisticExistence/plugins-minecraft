@@ -1,0 +1,9 @@
+name: Gravity
+main: plugin.Gravity
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  
+   gravity:
+      description: 
+      usage:	
