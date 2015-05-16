@@ -69,12 +69,11 @@ public class ClonePlugin extends JavaPlugin implements Listener{
 						Block b = e.getPlayer().getWorld().getBlockAt(x, y, z);
 						materiales[x][y][z] = b.getType();
 						locz++;
-						locy++;
-						locx++;
-
 
 					}
+					locy++;
 				}
+				locx++;
 				
 			}
 		}
