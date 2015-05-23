@@ -1,0 +1,6 @@
+name: Ender
+main: plugin.ArmaCerdoPlugin
+author: [Autor]
+description: Sin descripcion de momento...
+version: 1.0
+commands:  

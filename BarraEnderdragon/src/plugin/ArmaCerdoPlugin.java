@@ -1,7 +1,5 @@
 package plugin;
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -19,47 +18,30 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class AutoMiraPlugin extends JavaPlugin implements Listener {
+public class ArmaCerdoPlugin extends JavaPlugin implements Listener {
 	private boolean activo = false;
 	@Override
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 	}
-	ItemStack lanzaCerdos = new ItemStack(Material.RAW_BEEF);
-	ItemMeta ImCerdo = lanzaCerdos.getItemMeta();
-	ChatColor oro = ChatColor.GOLD;
 	@EventHandler
-	public void ProjectileLaunched(ProjectileLaunchEvent e){
-		List<Entity> entidades= e.getEntity().getWorld().getEntities();
-		for(int i = 0; i < entidades.size(); i++){
-			Entity en = entidades.get(i);
-			if(!(en.isDead())){
-				if(e.getEntity() instanceof Arrow){
-					if(e.getEntity().getShooter() instanceof Player){
-						Arrow a = (Arrow) e.getEntity();
-						Player p = (Player) e.getEntity().getShooter();
-						p.setTexturePack("https://github.com/TechTalentsTechPro/plugins-minecraft/blob/master/Huahwi_Pack.zip");
-					}
-					
-				}
-			}
-			
-			
-		}
-		
-		
-		
+	public void onPlayerJoin(final PlayerJoinEvent e){
+		final EnderDragon en = e.getPlayer().getWorld().spawn(e.getPlayer().getLocation().add(0, 50, 0), EnderDragon.class);
+		en.setCustomName(ChatColor.RED+""+ChatColor.BOLD+"El Server De jorgejorge99");
+        en.setCustomName(ChatColor.GREEN+""+ChatColor.BOLD+en.getCustomName()+"KARMA:");
+        en.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,1000000,10000000));
+        en.setHealth(1);
+       
 	}
-	
-	
-	
 
 }
 
