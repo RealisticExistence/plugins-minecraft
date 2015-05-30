@@ -3,31 +3,22 @@ package plugin;
 
 
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityInteractEvent;
-import org.bukkit.event.player.PlayerEggThrowEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 
 public class CastlePlugin extends JavaPlugin implements Listener{
 	@Override
@@ -65,6 +56,7 @@ public class CastlePlugin extends JavaPlugin implements Listener{
 						if(p.getItemInHand().getItemMeta().getDisplayName().contains("Castle")){
 							Location loc = construirCastillo(p.getLocation(),50,50,5,3,3,10);
 							p.teleport(loc);
+							
 
 						}
 
@@ -76,6 +68,56 @@ public class CastlePlugin extends JavaPlugin implements Listener{
 		}
 
 
+	}
+
+	private void generarCofres(Location loc) {
+		for(int x = 0; x <= 12; x++){
+			for(int y = 0; y < 5; y++){
+				loc.getWorld().getBlockAt(x+loc.getBlockX(),y+loc.getBlockY(),1).setType(Material.CHEST);
+				Chest c = (Chest) loc.getWorld().getBlockAt(x+loc.getBlockX(),y+loc.getBlockY(),1).getState();
+				if(x == 0){
+					for(int i = 0; i <= c.getInventory().getSize()/2; i++){
+						c.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+					}
+					for(int i = 0; i <= c.getInventory().getSize()/2; i++){
+						c.getInventory().addItem(new ItemStack(Material.BOW));
+					}
+				}
+				if(x == 2){
+					for(int i = 0; i <= c.getInventory().getSize(); i++){
+						c.getInventory().addItem(new ItemStack(Material.ARROW,64));
+					}
+					
+				}
+				if(x == 4){
+					for(int i = 0; i <= c.getInventory().getSize(); i++){
+						c.getInventory().addItem(new ItemStack(Material.DIAMOND_HELMET));
+					}
+				}
+				if(x == 6){
+					for(int i = 0; i <= c.getInventory().getSize(); i++){
+						c.getInventory().addItem(new ItemStack(Material.DIAMOND_CHESTPLATE));
+					}
+				}
+				if(x == 8){
+					for(int i = 0; i <= c.getInventory().getSize(); i++){
+						c.getInventory().addItem(new ItemStack(Material.DIAMOND_LEGGINGS));
+					}
+				}
+				if(x == 10){
+					for(int i = 0; i <= c.getInventory().getSize(); i++){
+						c.getInventory().addItem(new ItemStack(Material.DIAMOND_BOOTS));
+					}
+				}
+				if(x == 12){
+					for(int i = 0; i <= c.getInventory().getSize(); i++){
+						c.getInventory().addItem(new ItemStack(Material.COOKED_BEEF,64));
+					}
+				}
+			}
+			x++;
+
+		}
 	}
 
 	private Location construirCastillo(Location loc, int anchoCastillo, int largoCastillo, int altoCastillo, int anchoTorre, int largoTorre, int altoTorre) {
@@ -151,8 +193,9 @@ public class CastlePlugin extends JavaPlugin implements Listener{
 
 
 		loc.add(anchoCastillo/2, 1, -largoCastillo/2);
-
+		generarCofres(loc);
 		return loc;
+		
 
 	}
 
@@ -195,11 +238,11 @@ public class CastlePlugin extends JavaPlugin implements Listener{
 
 						}
 						else if((int)Math.sqrt(x*x+z*z) == radio2){
-							
+
 							if(almena){
 								Block b2 = loc.getWorld().getBlockAt(x+xP, y+yP, z+zP);
 								b2.setType(castleMaterial);
-							
+
 							}
 							if(almena){
 								almena = false;

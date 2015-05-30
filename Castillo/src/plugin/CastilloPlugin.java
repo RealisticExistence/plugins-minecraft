@@ -21,6 +21,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionType;
 
 public class CastilloPlugin extends JavaPlugin implements Listener {
 	private boolean activo = false;
@@ -44,6 +46,7 @@ public class CastilloPlugin extends JavaPlugin implements Listener {
 			ImCerdo.setDisplayName(oro + "Arma Lanza Cerdos");
 			lanzaCerdos.setItemMeta(ImCerdo);
 			p.getInventory().addItem(lanzaCerdos);
+
 		}
 		return false;
 	}
