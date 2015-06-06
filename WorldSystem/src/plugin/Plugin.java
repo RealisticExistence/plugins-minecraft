@@ -1,5 +1,9 @@
 package plugin;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -14,6 +18,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.avaje.ebeaninternal.server.cluster.Packet;
+import com.avaje.ebeaninternal.server.cluster.PacketMessages;
+import com.avaje.ebeaninternal.server.cluster.PacketTransactionEvent;
+import com.avaje.ebeaninternal.server.cluster.PacketWriter;
 
 public class Plugin extends JavaPlugin implements Listener{
 	Material m = null;
@@ -34,6 +43,14 @@ public class Plugin extends JavaPlugin implements Listener{
 
 		}
 		Player p = (Player) sender;
+		  ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		  DataOutputStream data = new DataOutputStream(bytes);	
+		  try {
+			data.write(0x07);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(p.isOp()) {
 			if(command.getName().equalsIgnoreCase("worldsystem")){
 				if(args[0] != null && args.length > 0) {
