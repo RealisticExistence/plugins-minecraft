@@ -60,6 +60,10 @@ public class Plugin extends JavaPlugin implements Listener{
 		PacketPlayOutCamera camera = new PacketPlayOutCamera( ent.getHandle());
 		((CraftPlayer) e.getPlayer()).getHandle().playerConnection.sendPacket(camera);
 	}
+	@EventHandler
+	public void EntityDie(){
+		
+	}
 		
 		
 
